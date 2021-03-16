@@ -1,0 +1,6 @@
+FROM rabbitmq:3-management
+RUN apt update && apt install tzdata
+ENV TZ America/Bogota
+
+RUN rabbitmq-plugins enable rabbitmq_mqtt
+RUN rabbitmq-plugins enable rabbitmq_web_mqtt

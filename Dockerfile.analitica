@@ -1,0 +1,10 @@
+FROM tensorflow/tensorflow
+
+WORKDIR /app
+RUN pip install --upgrade pip
+RUN set -ex && \
+    pip install numpy pandas scipy pika
+RUN pip install paho-mqtt
+RUN pip install scikit-learn
+RUN pip install pytz
+CMD ["python", "proxy.py"]

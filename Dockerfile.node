@@ -1,0 +1,10 @@
+FROM nodered/node-red:latest
+
+RUN npm install node-red-contrib-amqp-ack
+RUN npm install node-red-dashboard
+RUN npm install node-red-contrib-web-worldmap
+RUN npm install node-red-contrib-chartjs
+RUN npm install node-red-contrib-graphs
+RUN npm install node-red-node-twilio
+RUN npm install node-red-node-email
+RUN npm config set strict-ssl=false

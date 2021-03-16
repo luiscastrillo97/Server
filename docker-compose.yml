@@ -1,0 +1,48 @@
+
+version: '3.3'
+
+services:
+  node:
+    container_name: ui
+    image: taller3/nodered
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    volumes:
+     - ./app:/app
+    ports:
+      - "1880:1880"
+  analitica:
+    container_name: analitica
+    image: taller3/analitica
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.analitica
+    volumes:
+     - ./app:/app
+    depends_on:
+      - rabbit
+  rabbit:
+    container_name: myrabbit
+    image: taller3/rabbit
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.rabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "1883:1883"
+    networks:
+      default:
+        aliases:
+          - rabbit
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.0.0/24
